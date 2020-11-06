@@ -1,7 +1,7 @@
 // todo: create a Account Interface
 package Account;
 
-public class BankAccount {
+public class BankAccount implements Account {
   protected int balance;
   private String acctHolder;
   private String acctNum;
@@ -14,6 +14,7 @@ public class BankAccount {
     this.type = type;
   }
 
+  @Override
   public void deposit(int amount) {
     if (amount > 0) {
       this.balance += amount;
@@ -21,6 +22,7 @@ public class BankAccount {
 
   }
 
+  @Override
   public void withdraw(int amount) {
     if (amount <= this.balance && amount >= 0) {
       this.balance -= amount;
@@ -39,5 +41,6 @@ public class BankAccount {
     return bal + "\t\t" + acctHol + "\t\t" + acctN + "\t\t" + acctType;
   }
 
+  @Override
   public int getBalance() { return balance; }
 }
