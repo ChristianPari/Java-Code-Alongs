@@ -1,4 +1,4 @@
-
+// todo: create a Account Interface
 package Account;
 
 public class BankAccount {
@@ -28,6 +28,7 @@ public class BankAccount {
 
   }
 
+  @Override
   public String toString() {
     int dollars = this.balance / 100;
     int cents = this.balance % 100;
@@ -37,4 +38,6 @@ public class BankAccount {
     String acctType = "Type: " + this.type;
     return bal + "\t\t" + acctHol + "\t\t" + acctN + "\t\t" + acctType;
   }
+
+  public int getBalance() { return balance; }
 }
