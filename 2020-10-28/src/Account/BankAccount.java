@@ -1,4 +1,3 @@
-// todo: create a Account Interface
 package Account;
 
 public class BankAccount implements Account {

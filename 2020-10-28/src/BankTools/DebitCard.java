@@ -1,5 +1,6 @@
 package BankTools;
 
+import Account.Account;
 import Account.CheckingAccount;
 import Account.SavingsAccount;
 
@@ -13,8 +14,9 @@ public class DebitCard {
   private String securityCode;
 //  private Calendar expirationDate;
   private String cardHolder;
-  private List<CheckingAccount> atmCheckingAccounts = new ArrayList<>();
-  private List<SavingsAccount> atmSavingsAccounts = new ArrayList<>();
+  private List<Account> atmAccounts = new ArrayList<>();
+//  private List<CheckingAccount> atmCheckingAccounts = new ArrayList<>();
+//  private List<SavingsAccount> atmSavingsAccounts = new ArrayList<>();
 
   public DebitCard(
           CheckingAccount primary,
@@ -30,13 +32,7 @@ public class DebitCard {
     this. cardHolder = cardHolder;
   }
 
-  public void addCheckingAccount(CheckingAccount account) {
-    atmCheckingAccounts.add(account);
-  }
-
-  public void addSavingsAccount(SavingsAccount account) {
-    atmSavingsAccounts.add(account);
-  }
+  public void addAccount(Account account) { atmAccounts.add(account); }
 
   public boolean charge(int amount, String pin) {
     if (this.pin.equals(pin) && primary.getBalance() >= amount) {
@@ -46,4 +42,13 @@ public class DebitCard {
     return false;
   }
 
+  public void displayAccounts() {
+    for (var account : atmAccounts) {
+      System.out.println(account.toString());
+    }
+  }
+
+  public void details() {
+    System.out.println("Owner: " + cardHolder + "\tAccount Balance: " + primary.getBalance());
+  }
 }
