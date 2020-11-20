@@ -19,11 +19,17 @@ public class Hand {
     }
   }
 
-  public void roll(Random random, int choice) {
+  public void roll(
+          Random random,
+          int choice
+  ) {
     dice.get(choice).roll(random);
   }
 
-  public void roll(Random random, List<Integer> choices) {
+  public void roll(
+          Random random,
+          List<Integer> choices
+  ) {
     for (int choice : choices) { roll(random, choice); }
   }
 

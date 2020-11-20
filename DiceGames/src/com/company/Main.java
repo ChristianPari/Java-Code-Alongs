@@ -11,9 +11,9 @@ public class Main {
     Console.welcome();
     myHand.roll(random);
     System.out.println(myHand);
-    myHand.roll(random, Console.getChoice());
+    myHand.roll(random, Console.getChoices());
     System.out.println(myHand);
-    myHand.roll(random, Console.getChoice());
+    myHand.roll(random, Console.getChoices());
     System.out.println(myHand);
   }
 }
