@@ -6,6 +6,7 @@ import Account.SavingsAccount;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class DebitCard {
   private CheckingAccount primary;
@@ -20,13 +21,12 @@ public class DebitCard {
 
   public DebitCard(
           CheckingAccount primary,
-          String cardNumber,
           String pin,
           String securityCode,
           String cardHolder
   ) {
     this.primary = primary;
-    this.cardNumber = cardNumber;
+    this.cardNumber = generateCardNumber();
     this.pin = pin;
     this.securityCode = securityCode;
     this. cardHolder = cardHolder;
@@ -50,5 +50,20 @@ public class DebitCard {
 
   public void details() {
     System.out.println("Owner: " + cardHolder + "\tAccount Balance: " + primary.getBalance());
+  }
+  public String generateCardNumber() {
+    Random random = new Random();
+    String number = "";
+    int start = 1;
+    while (start <= 16) {
+      number += random.nextInt(9) + 1;
+      start++;
+    }
+    return number;
+  }
+
+  @Override
+  public String toString() {
+    return cardHolder + " " + cardNumber;
   }
 }

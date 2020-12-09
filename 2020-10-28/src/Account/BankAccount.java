@@ -13,6 +13,8 @@ public class BankAccount implements Account {
     this.type = type;
   }
 
+  public String getAcctNum() { return acctNum; }
+
   @Override
   public void deposit(int amount) {
     if (amount > 0) {
