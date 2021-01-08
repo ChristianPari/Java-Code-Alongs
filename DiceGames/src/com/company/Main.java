@@ -8,12 +8,12 @@ public class Main {
     Random random = new Random();
     Hand myHand = new Hand(5);
 
-    Console.welcome();
+    YahtzeeConsole.welcome();
     myHand.roll(random);
     System.out.println(myHand);
-    myHand.roll(random, Console.getChoices());
+    myHand.roll(random, YahtzeeConsole.getChoices());
     System.out.println(myHand);
-    myHand.roll(random, Console.getChoices());
+    myHand.roll(random, YahtzeeConsole.getChoices());
     System.out.println(myHand);
   }
 }
