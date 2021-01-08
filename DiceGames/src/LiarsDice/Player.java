@@ -1,5 +1,7 @@
 package LiarsDice;
 
+import com.company.Console;
+
 public class Player {
   static int AMOUNT_OF_DICE = 7;
   private Cup cup;
@@ -18,5 +20,25 @@ public class Player {
     cup.peek();
   }
 
+  public int[] getClaim() {
+    int dieValue,
+        dieCount;
 
+    dieValue = Console.getInt(1, 6, "What die value? (1 - 6)");
+    dieCount = Console.getInt(1, 14, "How many " + dieValue + "'s? (1 - 14)");
+
+    return new int[] {dieValue, dieCount};
+  }
+
+  public boolean getDecision() {
+    return Console.getYesNo("Is the player lying? (Y)es or (N)o");
+  }
+
+  public boolean isOut() {
+    return cup.amountOfDice() <= 0;
+  }
+
+  public String getName() {
+    return name;
+  }
 }

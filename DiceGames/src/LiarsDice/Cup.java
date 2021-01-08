@@ -38,4 +38,8 @@ public class Cup {
       die.roll(random);
     }
   }
+
+  public int amountOfDice() {
+    return dice.size();
+  }
 }
