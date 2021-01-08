@@ -72,7 +72,7 @@ public class LiarsDice {
       return false;
     }
 
-    // if all nothing above passes then it is a valid claim
+    // if nothing above passes then it is a valid claim
     return true;
   }
 }
