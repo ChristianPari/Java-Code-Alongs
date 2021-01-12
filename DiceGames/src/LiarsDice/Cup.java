@@ -42,4 +42,12 @@ public class Cup {
   public int amountOfDice() {
     return dice.size();
   }
+
+  public int countOfDie(int dieValue) {
+    int count = 0;
+    for (var die : dice) {
+      if (die.getValue() == dieValue) count++;
+    }
+    return count;
+  }
 }

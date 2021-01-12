@@ -20,6 +20,10 @@ public class Player {
     cup.peek();
   }
 
+  public int countOfDie(int dieValue) { return cup.countOfDie(dieValue); }
+
+  public void removeDie() { cup.removeDie(); }
+
   public int[] getClaim() {
     int dieValue,
         dieCount;
