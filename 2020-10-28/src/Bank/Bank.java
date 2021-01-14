@@ -11,7 +11,7 @@ public class Bank {
   private int safeAmount;
   private Map<String, Client> clients = new HashMap<>();
   private Integer numOfClients = 0;
-  private Map<String, Account> accounts = new HashMap<>();
+  private Map<Integer, Account> accounts = new HashMap<>();
   private Integer numOfAccounts = 0;
 
   public Bank(String name) {
@@ -38,6 +38,7 @@ public class Bank {
     // create account and give it a client
     Account newAccount = createAccount(accountType, client, ++numOfAccounts, startingBalance, ui);
     // attach to accounts collection
+    accounts.put(numOfAccounts, newAccount);
     client.addAccount(newAccount);
   }
 

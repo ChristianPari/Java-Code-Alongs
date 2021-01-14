@@ -63,7 +63,7 @@ public class Client {
       }
     }
 
-    return name + "\n" + (display.equals("") ? "No accounts for this client" : display);
+    return "Client: " + name + "\n" + (display.equals("") ? "No accounts for this client" : display);
   }
 
   public String getName() { return name; }
