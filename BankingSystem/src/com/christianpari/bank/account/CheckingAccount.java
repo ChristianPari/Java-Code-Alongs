@@ -1,7 +1,6 @@
+package com.christianpari.bank.account;
 
-package Account;
-
-import Bank.Client;
+import com.christianpari.bank.Client;
 
 public class CheckingAccount extends BankAccount {
   private int withdrawLimit;

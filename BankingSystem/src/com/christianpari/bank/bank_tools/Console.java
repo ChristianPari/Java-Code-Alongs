@@ -1,4 +1,4 @@
-package BankTools;
+package com.christianpari.bank.bank_tools;
 
 import java.util.Scanner;
 

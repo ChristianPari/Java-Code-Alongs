@@ -1,8 +1,8 @@
-package Bank;
+package com.christianpari.bank;
 
-import Account.Account;
-import Account.CheckingAccount;
-import BankTools.DebitCard;
+import com.christianpari.bank.account.Account;
+import com.christianpari.bank.account.CheckingAccount;
+import com.christianpari.bank.bank_tools.DebitCard;
 
 import java.util.ArrayList;
 import java.util.HashMap;

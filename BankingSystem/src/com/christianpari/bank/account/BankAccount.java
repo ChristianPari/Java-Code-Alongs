@@ -1,6 +1,6 @@
-package Account;
+package com.christianpari.bank.account;
 
-import Bank.Client;
+import com.christianpari.bank.Client;
 
 public class BankAccount implements Account {
   protected int balance;

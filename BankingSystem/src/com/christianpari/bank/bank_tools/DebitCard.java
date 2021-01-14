@@ -1,9 +1,8 @@
-package BankTools;
+package com.christianpari.bank.bank_tools;
 
-import Account.Account;
-import Account.CheckingAccount;
-import Account.SavingsAccount;
-import Bank.Client;
+import com.christianpari.bank.Client;
+import com.christianpari.bank.account.Account;
+import com.christianpari.bank.account.CheckingAccount;
 
 import java.util.ArrayList;
 import java.util.List;

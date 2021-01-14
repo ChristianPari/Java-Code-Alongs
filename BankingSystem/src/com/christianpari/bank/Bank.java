@@ -1,7 +1,7 @@
-package Bank;
+package com.christianpari.bank;
 
-import Account.*;
-import BankTools.UI;
+import com.christianpari.bank.account.*;
+import com.christianpari.bank.bank_tools.UI;
 
 import java.util.HashMap;
 import java.util.Map;
