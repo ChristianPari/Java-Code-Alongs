@@ -5,60 +5,66 @@ import Account.CheckingAccount;
 import BankTools.DebitCard;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Client {
   private String firstName;
   private String lastName;
   private String name;
-  private String ssn;
-  private String address;
-  private String phoneNumber;
-  private List<Account> accounts = new ArrayList<>();
+  private String clientID;
+  private Map<String, Account> accounts = new HashMap<>();
   private List<DebitCard> debitCards = new ArrayList<>();
 
   public Client(
           String firstName,
           String lastName,
-          String ssn,
-          String address,
-          String phoneNumber
+          String clientID
   ) {
     this.firstName = firstName;
     this.lastName = lastName;
     this.name = firstName + " " + lastName;
-    this.ssn = ssn;
-    this.address = address;
-    this.phoneNumber = phoneNumber;
+    this.clientID = clientID;
   }
 
-  public void addAccount(Account account) { accounts.add(account); }
+  public void addAccount(Account account) { accounts.put(account.getAcctNum(), account); }
+
   public void addDebitCard(String accountNum) {
-    for (var account : accounts) {
-      if (account instanceof CheckingAccount) {
-        if (account.getAcctNum().equals(accountNum)) {
-          DebitCard card = new DebitCard(
+    Account account = accounts.get(accountNum);
+    if (account instanceof CheckingAccount) {
+      DebitCard card = new DebitCard(
               (CheckingAccount) account,
               "1010",
               "101",
-              name
+              this
           );
-          debitCards.add(card);
-        }
-      }
+      debitCards.add(card);
+    } else {
+      System.out.println("Invalid Account Type");
     }
   }
 
   @Override
   public String toString() {
-    String display = "Accounts\n";
-    for (var act : accounts) {
-      display += act + "\n";
+    String display = "";
+
+    if (!accounts.isEmpty()) {
+      display = "Accounts\n";
+      for (var acct : accounts.values()) {
+        display += acct + "\n";
+      }
     }
-    display += "\nDebit Cards\n";
-    for (var card : debitCards) {
-      display += card + "\n";
+
+    if (!debitCards.isEmpty()) {
+      display += "\nDebit Cards\n";
+      for (var card : debitCards) {
+        display += card + "\n";
+      }
     }
-    return name + "\n" + display;
+
+    return name + "\n" + (display.equals("") ? "No accounts for this client" : display);
   }
+
+  public String getName() { return name; }
 }

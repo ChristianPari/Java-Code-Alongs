@@ -1,29 +1,41 @@
 
 package Account;
 
+import Bank.Client;
+
 public class InvestmentAccount extends BankAccount {
   private int investment_rate;
   private int period;
+  private String periodType;
+  static int withdrawFee = 100;
 
   public InvestmentAccount(
           int balance,
-          String acctHolder,
+          Client acctHolder,
           String acctNum,
-          int investment_rate
+          int investment_rate,
+          int period,
+          String periodType
   ) {
     super(balance, acctHolder, acctNum, "Investment");
     this.investment_rate = investment_rate;
+    this.period = period;
+    this.periodType = periodType;
   }
 
   public InvestmentAccount(
           int balance,
-          String acctHolder,
+          Client acctHolder,
           String acctNum,
           int investment_rate,
+          int period,
+          String periodType,
           String type
   ) {
     super(balance, acctHolder, acctNum, type);
     this.investment_rate = investment_rate;
+    this.period = period;
+    this.periodType = periodType;
   }
 
   public void applyInvestment() {
@@ -33,6 +45,6 @@ public class InvestmentAccount extends BankAccount {
 
   @Override
   public void withdraw(int amount) {
-    super.withdraw(amount + 1000);
+    super.withdraw(amount + withdrawFee);
   }
 }

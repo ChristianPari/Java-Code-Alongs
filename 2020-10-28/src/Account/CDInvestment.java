@@ -1,19 +1,22 @@
 package Account;
 
+import Bank.Client;
+
 public class CDInvestment extends InvestmentAccount {
   private int timeFrame;
+  private String timePeriod = "Y";
 
   public CDInvestment(
           int balance,
-          String acctHolder,
+          Client acctHolder,
           String acctNum,
-          int timeFrame
+          int timeFrame,
+          int interestRate,
+          int period
   ) {
-    super(balance, acctHolder, acctNum, 5, "Certificate of Deposit");
+    super(balance, acctHolder, acctNum, interestRate, period,"M","Certificate of Deposit");
     this.timeFrame = timeFrame;
   }
-
-//  todo: getTimeFrame
 
   public void checkIfInterest(int time) {
     if (time <= timeFrame && balance > 0) {

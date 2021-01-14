@@ -1,12 +1,19 @@
 package Account;
 
+import Bank.Client;
+
 public class BankAccount implements Account {
   protected int balance;
-  private String acctHolder;
+  private Client acctHolder;
   private String acctNum;
   private String type;
 
-  public BankAccount(int balance, String acctHolder, String acctNum, String type) {
+  public BankAccount(
+    int balance,
+    Client acctHolder,
+    String acctNum,
+    String type
+  ) {
     this.balance = balance;
     this.acctHolder = acctHolder;
     this.acctNum = acctNum;
@@ -36,7 +43,7 @@ public class BankAccount implements Account {
     int dollars = this.balance / 100;
     int cents = this.balance % 100;
     String bal = "Balance: $" + dollars + "." + cents;
-    String acctHol = "Acct Holder: " + this.acctHolder;
+    String acctHol = "Acct Holder: " + this.acctHolder.getName();
     String acctN = "Acct Number: " + this.acctNum;
     String acctType = "Type: " + this.type;
     return bal + "\t\t" + acctHol + "\t\t" + acctN + "\t\t" + acctType;
@@ -44,4 +51,8 @@ public class BankAccount implements Account {
 
   @Override
   public int getBalance() { return balance; }
+  @Override
+  public Client getAcctHolder() { return acctHolder; }
+
+  public String getType() { return type; }
 }

@@ -1,10 +1,17 @@
 
 package Account;
 
+import Bank.Client;
+
 public class SavingsAccount extends BankAccount {
   private int interest_rate;
 
-  public SavingsAccount(int balance, String acctHolder, String acctNum, int interest_rate) {
+  public SavingsAccount(
+    int balance,
+    Client acctHolder,
+    String acctNum,
+    int interest_rate
+  ) {
     super(balance, acctHolder, acctNum, "Savings");
     this.interest_rate = interest_rate;
   }

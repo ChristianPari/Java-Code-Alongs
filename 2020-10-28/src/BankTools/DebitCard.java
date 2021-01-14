@@ -3,6 +3,7 @@ package BankTools;
 import Account.Account;
 import Account.CheckingAccount;
 import Account.SavingsAccount;
+import Bank.Client;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,16 +15,14 @@ public class DebitCard {
   private String pin;
   private String securityCode;
 //  private Calendar expirationDate;
-  private String cardHolder;
+  private Client cardHolder;
   private List<Account> atmAccounts = new ArrayList<>();
-//  private List<CheckingAccount> atmCheckingAccounts = new ArrayList<>();
-//  private List<SavingsAccount> atmSavingsAccounts = new ArrayList<>();
 
   public DebitCard(
           CheckingAccount primary,
           String pin,
           String securityCode,
-          String cardHolder
+          Client cardHolder
   ) {
     this.primary = primary;
     this.cardNumber = generateCardNumber();
@@ -34,7 +33,10 @@ public class DebitCard {
 
   public void addAccount(Account account) { atmAccounts.add(account); }
 
-  public boolean charge(int amount, String pin) {
+  public boolean charge(
+    int amount,
+    String pin
+  ) {
     if (this.pin.equals(pin) && primary.getBalance() >= amount) {
       primary.withdraw(amount);
       return true;
@@ -49,7 +51,7 @@ public class DebitCard {
   }
 
   public void details() {
-    System.out.println("Owner: " + cardHolder + "\tAccount Balance: " + primary.getBalance());
+    System.out.println("Owner: " + cardHolder.getName() + "\tAccount Balance: " + primary.getBalance());
   }
   public String generateCardNumber() {
     Random random = new Random();
@@ -64,6 +66,6 @@ public class DebitCard {
 
   @Override
   public String toString() {
-    return cardHolder + " " + cardNumber;
+    return cardHolder.getName() + " " + cardNumber;
   }
 }

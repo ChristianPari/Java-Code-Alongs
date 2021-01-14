@@ -1,11 +1,18 @@
 
 package Account;
 
+import Bank.Client;
+
 public class CheckingAccount extends BankAccount {
   private int withdrawLimit;
   private int dailyWithdrawn = 0;
 
-  public CheckingAccount(int balance, String acctHolder, String acctNum, int withdrawLimit) {
+  public CheckingAccount(
+    int balance,
+    Client acctHolder,
+    String acctNum,
+    int withdrawLimit
+  ) {
     super(balance, acctHolder, acctNum, "Checking");
     this.withdrawLimit = withdrawLimit;
   }
