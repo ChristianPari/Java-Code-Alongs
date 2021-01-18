@@ -9,37 +9,41 @@ public class Card {
     String suit
   ) {
     this.value = value;
-    this.suit = (value == 0) ? "" : suit; // since JOKERS are a value of 0, don't need suit
+    this.suit = suit;
   }
 
   @Override
   public String toString() {
-    String display = suit + "";
+    String display = "";
     switch (value) {
       case 0:
-        return "JOKER";
+        display = "JOKER";
+        break;
 
-        case 1:
-        display += "ACE";
+      case 1:
+        display = "ACE";
         break;
 
       case 11:
-        display += "JACK";
+        display = "JACK";
         break;
 
       case 12:
-        display += "QUEEN";
+        display = "QUEEN";
         break;
 
       case 13:
-        display += "KING";
+        display = "KING";
         break;
 
       default:
-        display += Integer.toString(value);
+        display = value == 10 ? Integer.toString(value) : " " + value;
     }
 
-    display += suit;
-    return display;
+    return display + suit;
+  }
+
+  public int getValue() {
+    return value;
   }
 }

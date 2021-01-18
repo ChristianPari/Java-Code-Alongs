@@ -1,22 +1,9 @@
 package com.christianpari;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Scanner;
 
 public class RiggedDeck implements Deck {
-  private Map<String, String> suits = new HashMap<>();
-
-  public RiggedDeck() {
-    generateDeckSuits();
-  }
-
-  private void generateDeckSuits() {
-    suits.put("SPADE", "\u2664");
-    suits.put("HEART", "\u2661");
-    suits.put("CLUB", "\u2667");
-    suits.put("DIAMOND", "\u2662");
-  }
+  private final static String[] SUITS = {"♤", "♥", "♧", "♦"};
 
   @Override
   public void shuffle() {
@@ -26,11 +13,14 @@ public class RiggedDeck implements Deck {
   @Override
   public Card draw() {
     Scanner sc = new Scanner(System.in);
-    System.out.println("Card Value: 0 - 13");
+    System.out.println("Card Value: 1 - 13");
     int value = sc.nextInt();
-    sc.nextLine();
-    System.out.println("Card Suit: 'SPADE' 'HEART' 'CLUB' 'DIAMOND'");
-    String suit = sc.nextLine();
-    return new Card(value, suits.get(suit));
+    System.out.println("Card Suit: 1 - 4");
+    String suit = sc.next();
+    return new Card(value, SUITS[Integer.parseInt(suit)]);
+  }
+
+  public boolean isEmpty() {
+    return false;
   }
 }

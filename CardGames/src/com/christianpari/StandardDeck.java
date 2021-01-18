@@ -3,63 +3,26 @@ package com.christianpari;
 import java.util.*;
 
 public class StandardDeck implements Deck {
-  // VARIABLES
-  private Map<String, String> suits = new HashMap<>();
-  private int[] values = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13};
-  private List<Card> cards = new ArrayList<>();
+  private final static String[] SUITS = {"♤", "♥", "♧", "♦"};
+  private final static int[] VALUES = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13};
+  private List<Card> cards;
 
-  // CONSTRUCTORS
   public StandardDeck() {
-    generateDeckSuits();
-    fillDeck();
-  }
-
-  public StandardDeck(
-    Map<String, String> suits
-  ) {
-    this.suits = suits;
-    fillDeck();
-  }
-
-  public StandardDeck(
-    Map<String, String> suits,
-    int[] values
-  ) {
-    this.suits = suits;
-    this.values = values;
-    fillDeck();
-  }
-
-  public StandardDeck(
-    List<Card> cards
-  ) {
-    this.cards = cards;
-  }
-
-  // INITIALIZING METHODS
-  private void generateDeckSuits() {
-    suits.put("SPADE", "\u2664");
-    suits.put("HEART", "\u2661");
-    suits.put("CLUB", "\u2667");
-    suits.put("DIAMOND", "\u2662");
-  }
-
-  private void fillDeck() {
-    for (var suit : suits.values()) {
-      for (var value : values) {
+    cards = new ArrayList<>();
+    for (var suit : SUITS) {
+      for (var value : VALUES) {
         cards.add(new Card(value, suit));
       }
     }
   }
 
-  // USE METHODS
-  @Override
-  public void shuffle() {
-    Collections.shuffle(cards);
+  public void shuffle() { Collections.shuffle(cards);}
+
+  public Card draw() { return cards.remove(cards.size() - 1); }
+
+  public boolean isEmpty() {
+    if (cards.size() == 0) return true;
+    return false;
   }
 
-  @Override
-  public Card draw() {
-    return cards.remove(cards.size() - 1);
-  }
 }
