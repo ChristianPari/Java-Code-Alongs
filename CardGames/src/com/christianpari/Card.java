@@ -3,6 +3,7 @@ package com.christianpari;
 public class Card {
   private int value;
   private String suit;
+  private boolean faceDown = true;
 
   public Card(
     int value,
@@ -46,4 +47,7 @@ public class Card {
   public int getValue() {
     return value;
   }
+
+  public void flip() { faceDown = !faceDown; }
+  public boolean isFaceDown() { return faceDown; }
 }

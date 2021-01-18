@@ -1,0 +1,70 @@
+package com.christianpari.black_jack.actors;
+
+import com.christianpari.black_jack.Console;
+
+public class Player implements Actor {
+  static int HIT = 1,
+    STAND = 2,
+    DOUBLE = 2,
+    SPLIT = 4;
+  static Console console = new Console();
+
+  private String name;
+  private int wallet;
+
+  public Player() {
+    name = console.getString("What is your name?");
+    wallet = 1000;
+  }
+
+  @Override
+  public String getName() { return name; }
+
+  public int setBet() {
+    int bet;
+    do {
+      System.out.println("Wallet: " + wallet);
+      bet = console.getInt("What is your bet?");
+      if (validateBet(bet)) {
+        System.out.println("Invalid bet.");
+      }
+    } while (validateBet(bet));
+    return bet;
+  }
+
+  private boolean validateBet(int bet) { return bet > wallet && bet > 0; }
+
+  public void adjustWallet(int amount) { wallet += amount; }
+
+  public int getWallet() { return wallet; }
+
+  public void adjustWallet(
+    int amount,
+    String method
+  ) {
+    switch (method) {
+      case "win":
+        wallet += amount;
+        break;
+
+      case "lose":
+        wallet -= amount;
+        break;
+    }
+  }
+
+  @Override
+  public int getAction(
+    int score,
+    String query,
+    int minChoice,
+    int maxChoice
+  ) {
+    int choice;
+    do {
+      choice = console.getInt(query);
+    } while (choice < minChoice || choice > maxChoice);
+
+    return choice;
+  }
+}

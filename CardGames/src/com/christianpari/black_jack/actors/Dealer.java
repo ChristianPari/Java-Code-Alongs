@@ -12,13 +12,19 @@ public class Dealer implements Actor {
   }
 
   @Override
-  public int getAction(int score) {
+  public int getAction(
+    int score,
+    String query,
+    int minChoice,
+    int maxChoice
+  ) {
+    System.out.println("Dealer is deciding");
+    System.out.println(score < DECISION ? "Dealer Hit" : "Dealer Stands");
     return score < DECISION ? HIT : STAND;
   }
 
   @Override
-  public int getBet() {
+  public int setBet() {
     return 0;
   }
-
 }

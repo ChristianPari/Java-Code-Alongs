@@ -2,6 +2,6 @@ package com.christianpari;
 
 public interface Deck {
   void shuffle();
-  Card draw();
+  Card draw(boolean facing);
   boolean isEmpty();
 }

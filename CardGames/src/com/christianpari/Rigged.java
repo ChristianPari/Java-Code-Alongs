@@ -2,7 +2,7 @@ package com.christianpari;
 
 import java.util.Scanner;
 
-public class RiggedDeck implements Deck {
+public class Rigged implements Deck {
   private final static String[] SUITS = {"♤", "♥", "♧", "♦"};
 
   @Override
@@ -11,13 +11,15 @@ public class RiggedDeck implements Deck {
   }
 
   @Override
-  public Card draw() {
+  public Card draw(boolean facing) {
     Scanner sc = new Scanner(System.in);
     System.out.println("Card Value: 1 - 13");
     int value = sc.nextInt();
     System.out.println("Card Suit: 1 - 4");
     String suit = sc.next();
-    return new Card(value, SUITS[Integer.parseInt(suit)]);
+    Card card = new Card(value, SUITS[Integer.parseInt(suit) - 1]);
+    card.flip();
+    return card;
   }
 
   public boolean isEmpty() {
