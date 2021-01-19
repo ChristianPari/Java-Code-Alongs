@@ -1,6 +1,7 @@
 package com.christianpari.black_jack;
 
 import com.christianpari.Card;
+import com.christianpari.black_jack.actors.Actor;
 import com.christianpari.black_jack.actors.Player;
 
 public class BlackJack {
@@ -10,20 +11,50 @@ public class BlackJack {
   public void play() {
     // deal cards to actor
     // 1 face down 1 face up.
+    table.createPlayers();
     table.getDeck().shuffle();
     deal();
+
     // display card;
-    setBet(table.getPlayer());
-    displayTable();
+    getPlayerBets();
+
     // display Actor cards and score
-    table.getPlayer().revealHand();
-    do {} while (!actorTurn(table.getPlayer()));
+    runPlayersTurns();
     table.getDealer().revealHand();
     do {} while (!actorTurn(table.getDealer()));
-    // determine if Player won.
-    endRound(table.getPlayer());
-    System.out.println(((Player)table.getPlayer().getActor()).getWallet());
 
+    // determine if Player won.
+    displayTable();
+    for (BlackJackHand player : table.getPlayers()) {
+      endRound(player);
+    }
+
+    table.cleanTable();
+
+    // TODO: add ability to repeat game
+    displayWallets();
+
+  }
+
+  private void getPlayerBets() {
+    for (BlackJackHand player : table.getPlayers()) {
+      setBet(player);
+    }
+  }
+  private void runPlayersTurns() {
+    for (int activeIndex = 0; activeIndex < table.getPlayers().size(); activeIndex++) {
+      displayTable();
+      BlackJackHand player = table.getPlayers().get(activeIndex);
+      player.revealHand();
+      do {} while (!actorTurn(player));
+    }
+  }
+
+  private void displayWallets() {
+    for (BlackJackHand hand : table.getPlayers()) {
+      Player player = (Player) hand.getActor();
+      System.out.println(player.getName() + "'s wallet:  " + player.getWallet());
+    }
   }
 
   private void endRound(BlackJackHand player) {
@@ -60,18 +91,15 @@ public class BlackJack {
 
   final int HIT = 1, STAND = 2, DOUBLE = 3, SPLIT = 4;
 
-  private boolean performAction(BlackJackHand hand, int action) {
+  private boolean performAction(
+    BlackJackHand hand,
+    int action
+  ) {
     switch (action) {
       case DOUBLE:
         System.out.println("Double");
-//                int bet = hand.getBet();
-//                if (bet * 2 <= ((Player) hand.getActor()).getWallet()) {
-//                    hand.doubleBet();
-//                } else {
-//                    System.out.println("ERROR: Not enough money, Hit instead");
-//                    action = HIT;
-//                }
         hand.doubleBet();
+
       case HIT:
         Card card = table.getDeck().draw(true);
         System.out.println(hand.getName() +" Hit and was dealt " + card);
@@ -80,23 +108,22 @@ public class BlackJack {
           System.out.println("Busted " + hand.getScore());
           return true;
         }
-        return action == DOUBLE ? true : false;
+        return action == DOUBLE;
+
       case STAND:
         System.out.println(hand.getName() + " Stood.");
         return true;
+
       case SPLIT:
-        // take the second card out of the hand.
         Card splitCard = hand.removeCard(1);
-        // create a second hand.
         BlackJackHand newHand = new BlackJackHand(hand.getActor());
         newHand.addCard(splitCard);
-        // deal 1 card to both hands.
         hand.addCard(table.getDeck().draw(true));
         newHand.addCard(table.getDeck().draw(true));
-        // duplicate the bet on the second hand.
         newHand.setBet(hand.getBet());
-        // add hand to table;
-        // allow the play to continue;
+        table.getPlayers().add(newHand);
+        return false;
+
       default:
         System.out.println("error! default case Stand");
         return true;
@@ -105,14 +132,19 @@ public class BlackJack {
 
   private void deal() {
     for (int count = 0; count < 2; count++){
-      table.getPlayer().addCard(table.getDeck().draw(count == 0 ? false : true));
-      table.getDealer().addCard(table.getDeck().draw(count == 0 ? false : true));
+      for (BlackJackHand player : table.getPlayers()) {
+        player.addCard(table.getDeck().draw(count != 0));
+      }
+
+      table.getDealer().addCard(table.getDeck().draw(count != 0));
     }
   }
 
   private void displayTable() {
-    System.out.println(table.getDealer().getName() + ":  " + table.getDealer());
-    System.out.println(table.getPlayer().getName() + ":  " + table.getPlayer());
+    System.out.println(table.getDealer().getName() + ": " + table.getDealer());
+    for (BlackJackHand player : table.getPlayers()) {
+      System.out.println(player.getName() + ": " + player);
+    }
   }
 
   private void displayHand(BlackJackHand hand) {
@@ -123,19 +155,23 @@ public class BlackJack {
   private char didWin(BlackJackHand player) {
     int playerScore = player.getScore();
     int dealerScore = table.getDealer().getScore();
+
     if (didBust(playerScore)) {
       System.out.println(player.getName() + " busted!");
       return 'n';
     }
+
     if (didBust(dealerScore)) {
       System.out.println("Dealer busted!");
       return 'y';
     }
+
     System.out.println(player.getName() + " has " + playerScore + " | Dealer has " + dealerScore);
     if (playerScore < dealerScore) {
       System.out.println(player.getName() + " looses");
       return 'n';
     }
+
     if (playerScore == dealerScore) {
       System.out.println("Push!");
       return 'p';

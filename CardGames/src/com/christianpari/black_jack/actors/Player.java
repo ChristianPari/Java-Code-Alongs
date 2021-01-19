@@ -7,13 +7,12 @@ public class Player implements Actor {
     STAND = 2,
     DOUBLE = 2,
     SPLIT = 4;
-  static Console console = new Console();
 
   private String name;
   private int wallet;
 
   public Player() {
-    name = console.getString("What is your name?");
+    name = Console.getString("What is your name?");
     wallet = 1000;
   }
 
@@ -23,8 +22,8 @@ public class Player implements Actor {
   public int setBet() {
     int bet;
     do {
-      System.out.println("Wallet: " + wallet);
-      bet = console.getInt("What is your bet?");
+      System.out.println(name + "'s Wallet: " + wallet);
+      bet = Console.getInt("What is your bet?");
       if (validateBet(bet)) {
         System.out.println("Invalid bet.");
       }
@@ -62,7 +61,7 @@ public class Player implements Actor {
   ) {
     int choice;
     do {
-      choice = console.getInt(query);
+      choice = Console.getInt(query);
     } while (choice < minChoice || choice > maxChoice);
 
     return choice;

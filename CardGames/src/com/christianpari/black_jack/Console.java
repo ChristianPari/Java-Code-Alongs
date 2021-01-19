@@ -3,15 +3,16 @@ package com.christianpari.black_jack;
 import java.util.Scanner;
 
 public class Console {
-  Scanner scanner = new Scanner(System.in);
+  static Scanner scanner = new Scanner(System.in);
 
-  public int getInt(String text) {
+  public static int getInt(String text) {
     //TODO change to nextLine and add number validation;
     System.out.println(text);
-    return scanner.nextInt();
+    String input = scanner.nextLine();
+    return Integer.parseInt(input);
   }
 
-  public String getString(String text) {
+  public static String getString(String text) {
     System.out.println(text);
     return scanner.nextLine();
   }
