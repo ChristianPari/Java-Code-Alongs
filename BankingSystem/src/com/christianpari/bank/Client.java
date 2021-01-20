@@ -30,11 +30,19 @@ public class Client {
 
   public void addAccount(Account account) { accounts.put(account.getAcctNum(), account); }
 
-  public void addDebitCard(String accountNum) {
+  public void withdrawAccount(
+    String accountNum,
+    int amount
+    ) {
     Account account = accounts.get(accountNum);
-    if (account instanceof CheckingAccount) {
+    account.withdraw(amount);
+  };
+
+  public void addDebitCard(String accountNum) {
+    Account primary = accounts.get(accountNum);
+    if (primary instanceof CheckingAccount) {
       DebitCard card = new DebitCard(
-              (CheckingAccount) account,
+              (CheckingAccount) primary,
               "1010",
               "101",
               this
@@ -45,8 +53,11 @@ public class Client {
     }
   }
 
-  @Override
-  public String toString() {
+  public String displayAccount(String accountNum) {
+    return accounts.get(accountNum).toString();
+  }
+
+  public String displayAccounts() {
     String display = "";
 
     if (!accounts.isEmpty()) {
@@ -59,7 +70,7 @@ public class Client {
     if (!debitCards.isEmpty()) {
       display += "\nDebit Cards\n";
       for (var card : debitCards) {
-        display += card + "\n";
+        display += card.details() + "\n";
       }
     }
 

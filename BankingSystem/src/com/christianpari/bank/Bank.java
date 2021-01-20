@@ -8,14 +8,21 @@ import java.util.Map;
 
 public class Bank {
   private String name;
+  String city;
   private int safeAmount;
   private Map<String, Client> clients = new HashMap<>();
   private Integer numOfClients = 0;
   private Map<Integer, Account> accounts = new HashMap<>();
   private Integer numOfAccounts = 0;
 
-  public Bank(String name) {
+  public Bank(
+    String name,
+    String city,
+    int safeAmount
+  ) {
     this.name = name;
+    this.city = city;
+    this.safeAmount = safeAmount;
   }
 
   public void addClient(
@@ -33,11 +40,8 @@ public class Bank {
     int startingBalance,
     UI ui
   ) {
-    // get a client
     Client client = clients.get(clientID);
-    // create account and give it a client
     Account newAccount = createAccount(accountType, client, ++numOfAccounts, startingBalance, ui);
-    // attach to accounts collection
     accounts.put(numOfAccounts, newAccount);
     client.addAccount(newAccount);
   }
@@ -60,7 +64,6 @@ public class Bank {
         return new SavingsAccount(startingBalance, client, accountNum, interest);
 
       case "Certificate of Deposit":
-//        int timeFrame =
         return new CDInvestment(startingBalance, client, accountNum, 5, 2, 1);
 
       case "Investment":
@@ -69,6 +72,10 @@ public class Bank {
       default:
         return null;
     }
+  }
+
+  public void closeAccount(String accountNum) {
+    //todo
   }
 
   public void displayClients() {

@@ -49,9 +49,10 @@ public class DebitCard {
     }
   }
 
-  public void details() {
-    System.out.println("Owner: " + cardHolder.getName() + "\tAccount Balance: " + primary.getBalance());
+  public String details() {
+    return "Owner: " + cardHolder.getName() + "\tAccount Balance: " + primary.getBalance();
   }
+
   public String generateCardNumber() {
     Random random = new Random();
     String number = "";
@@ -65,6 +66,6 @@ public class DebitCard {
 
   @Override
   public String toString() {
-    return cardHolder.getName() + " " + cardNumber;
+    return cardHolder.getName() + " #" + cardNumber;
   }
 }
