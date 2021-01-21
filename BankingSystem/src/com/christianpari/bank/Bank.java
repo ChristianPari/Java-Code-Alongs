@@ -75,12 +75,16 @@ public class Bank {
   }
 
   public void closeAccount(String accountNum) {
-    //todo
+    int accountID = Integer.parseInt(accountNum);
+    Account account = accounts.get(accountID);
+    accounts.remove(accountID);
+    Client acctHolder = account.getAcctHolder();
+    acctHolder.removeAccount(accountNum);
   }
 
   public void displayClients() {
     for (var client : clients.values()) {
-      System.out.println(client);
+      System.out.println(client.displayAccounts());
     }
   }
 }

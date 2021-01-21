@@ -77,5 +77,7 @@ public class Client {
     return "Client: " + name + "\n" + (display.equals("") ? "No accounts for this client" : display);
   }
 
+  public void removeAccount(String accountNum) { accounts.remove(accountNum); }
+
   public String getName() { return name; }
 }
