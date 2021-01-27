@@ -53,6 +53,10 @@ public class Client {
     }
   }
 
+  public void addDebitCard(DebitCard card) {
+    debitCards.add(card);
+  }
+
   public String displayAccount(String accountNum) {
     return accounts.get(accountNum).toString();
   }

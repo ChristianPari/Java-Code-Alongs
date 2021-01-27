@@ -18,13 +18,14 @@ public class DebitCard {
   private List<Account> atmAccounts = new ArrayList<>();
 
   public DebitCard(
-          CheckingAccount primary,
-          String pin,
-          String securityCode,
-          Client cardHolder
+    CheckingAccount primary,
+    String cardNumber,
+    String pin,
+    String securityCode,
+    Client cardHolder
   ) {
     this.primary = primary;
-    this.cardNumber = generateCardNumber();
+    this.cardNumber = cardNumber;
     this.pin = pin;
     this.securityCode = securityCode;
     this. cardHolder = cardHolder;
