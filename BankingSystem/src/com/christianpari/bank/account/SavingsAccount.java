@@ -2,7 +2,7 @@ package com.christianpari.bank.account;
 
 import com.christianpari.bank.Client;
 
-public class SavingsAccount extends BankAccount {
+public class SavingsAccount extends Account {
   private int interest_rate;
 
   public SavingsAccount(

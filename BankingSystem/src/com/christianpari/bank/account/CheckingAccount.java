@@ -2,7 +2,7 @@ package com.christianpari.bank.account;
 
 import com.christianpari.bank.Client;
 
-public class CheckingAccount extends BankAccount {
+public class CheckingAccount extends Account {
   private int withdrawLimit;
   private int dailyWithdrawn = 0;
 

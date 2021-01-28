@@ -2,7 +2,7 @@ package com.christianpari.bank.account;
 
 import com.christianpari.bank.Client;
 
-public class BankAccount implements Account {
+public class BankAccount implements AccountInterface {
   protected int balance;
   private Client acctHolder;
   private String acctNum;

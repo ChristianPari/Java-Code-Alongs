@@ -98,7 +98,7 @@ public class Bank {
     String pin = Generator.randomCode(NUMBERS, 4);
     String cvv = Generator.randomCode(NUMBERS, 3);
 
-    return new DebitCard(account, cardNum, pin, cvv, owner);
+    return new DebitCard(account, cardNum, pin, owner);
   }
 
   public void closeAccount(String accountNum) {

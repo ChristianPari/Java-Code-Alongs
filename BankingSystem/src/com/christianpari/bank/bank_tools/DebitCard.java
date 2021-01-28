@@ -21,7 +21,6 @@ public class DebitCard {
     CheckingAccount primary,
     String cardNumber,
     String pin,
-    String securityCode,
     Client cardHolder
   ) {
     this.primary = primary;
